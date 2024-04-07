@@ -69,7 +69,7 @@ jobs:
         id: time
         uses: nanzm/get-time-action@master
         with:
-          format: 'YYYY-MM-DDTHH:mm:ss'
+          format: 'YYYYMMDDHHmmss'
 
       # Build and push Docker image with Buildx
       # https://github.com/docker/build-push-action

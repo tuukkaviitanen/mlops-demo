@@ -30,4 +30,4 @@ COPY ./api.py ./
 # Copy model from build stage
 COPY --from=build-stage /usr/src/app/model.pkl ./
 
-CMD ["python", "api.py"]
+CMD ["python", "-u", "api.py"]

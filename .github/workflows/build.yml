@@ -6,7 +6,7 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    - cron: '15 * * * *'
+    - cron: '0 */6 * * *'
 
 jobs:
   tag_release:
@@ -31,9 +31,6 @@ jobs:
         if: ${{ github.event_name != 'push' }}
         uses: WyriHaximus/github-action-get-previous-tag@v1.4.0
         id: read_tag
-
-      - name: Output tag
-        run: echo ${{steps.tagging.outputs.new_tag || steps.read_tag.outputs.tag}}
 
   publish_docker_image:
     needs: [tag_release]

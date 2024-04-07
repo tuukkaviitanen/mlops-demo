@@ -15,7 +15,8 @@ jobs:
       version: ${{steps.tagging.outputs.new_tag || steps.read_tag.outputs.tag}}
     steps:
       - uses: actions/checkout@v4
-
+        with:
+          fetch-depth: 0 # Required due to the way Git works, without it github-action-get-previous-tag action won't be able to find any or the correct tags
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         id: tagging

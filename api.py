@@ -2,6 +2,8 @@ import pickle
 import dateutil.parser as datetimeParser
 import pandas as pd
 from flask import Flask, jsonify, request, Response
+from waitress import serve
+import os
 
 # Open the file in binary mode
 with open('model.pkl', 'rb') as file:
@@ -36,4 +38,10 @@ def healthcheck():
       return Response(status=200)
 
 
-app.run()
+port = int(os.environ.get("PORT", 8080))
+
+print(f"Server starts listening on port {port}...")
+
+serve(app, host="0.0.0.0", port=port)
+
+print(f"Server is no longer listening on port {port}")

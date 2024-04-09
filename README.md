@@ -6,8 +6,9 @@
 - Install following dependencies
 ```
 pip install alpaca-py
-pip install scikit-learn
-pip install python-dateutil
+pip install statsmodels
+pip install prophet
+pip install plotly
 pip install Flask
 pip install waitress
 pip install pandas

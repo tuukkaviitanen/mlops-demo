@@ -1,5 +1,4 @@
 import pickle
-import dateutil.parser as datetimeParser
 import pandas as pd
 from flask import Flask, jsonify, request, Response
 from waitress import serve
@@ -10,13 +9,20 @@ with open('model.pkl', 'rb') as file:
     model = pickle.load(file)
 
 def predictBitcoinPrice(date):
-  pred_data = {
-    'timestamp': [date]
+  predDf = pd.DataFrame({'ds': [date]})
+  forecast = model.predict(predDf)
+  prediction = forecast['yhat'].iloc[0]
+  predictionHigh = forecast['yhat_upper'].iloc[0]
+  predictionLow = forecast['yhat_lower'].iloc[0]
+
+  result = {
+    "prediction": prediction,
+    "prediction_high": predictionHigh,
+    "prediction low": predictionLow,
+    "date": date
   }
-  predDf = pd.DataFrame(pred_data)
-  predArray = model.predict(predDf)
-  predPrice = predArray[0]
-  return predPrice
+
+  return result
 
 app = Flask("Crypto predict API")
 
@@ -24,13 +30,11 @@ app = Flask("Crypto predict API")
 def bitcoin():
   if(request.method == 'GET'):
     dateInput = request.args.get('date')
-    parsedDate = datetimeParser.parse(dateInput)
+    parsedDate = pd.to_datetime(dateInput)
 
-    data = {
-      "price": predictBitcoinPrice(parsedDate),
-      "date": parsedDate,
-    }
-    return jsonify(data)
+    result = predictBitcoinPrice(parsedDate)
+
+    return jsonify(result)
 
 @app.route('/healthz', methods=['GET'])
 def healthcheck():

@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 
 # Install training deps
 
-RUN pip install alpaca-py scikit-learn python-dateutil
+RUN pip install alpaca-py prophet
 
 # Build training file
 
@@ -21,7 +21,7 @@ WORKDIR /usr/src/app
 
 # Install API deps
 
-RUN pip install python-dateutil Flask waitress scikit-learn pandas
+RUN pip install Flask waitress pandas prophet
 
 # Copy API file
 

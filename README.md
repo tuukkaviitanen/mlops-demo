@@ -30,14 +30,16 @@
 - Listens to `/bitcoin` endpoint that takes `date` query parameter
   - Example: `/bitcoin?date=2024-06-01`
   - Uses the `date` parameter to run it through the model and returns the predicted price in the following [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) format:
-  ```
-  {
-    "date": "Sat, 01 Jun 2024 00:00:00 GMT",
-    "prediction": 56771.779953588826,
-    "prediction low": 53746.06414094623,
-    "prediction_high": 60034.61668451781
-  }
-  ```
+    ```
+    {
+      "date": "Sat, 01 Jun 2024 00:00:00 GMT",
+      "prediction": 56771.779953588826,
+      "prediction low": 53746.06414094623,
+      "prediction_high": 60034.61668451781
+    }
+    ```
+- [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is enabled for use form other applications
+  - [Flask-Cors](https://flask-cors.readthedocs.io/en/latest/) is used to simplify this process
 
 ## Dockerfile
 
@@ -75,6 +77,7 @@
     - [waitress](https://pypi.org/project/waitress/)
     - [pandas](https://pypi.org/project/pandas/)
     - [prophet](https://pypi.org/project/prophet/)
+    - [flask-cors](https://pypi.org/project/Flask-Cors/)
   - For running the [Jupyter notebook](https://realpython.com/jupyter-notebook-introduction/) machine learning experiment ([train.ipynb](train.ipynb))
     - [pandas](https://pypi.org/project/pandas/)
     - [prophet](https://pypi.org/project/prophet/)

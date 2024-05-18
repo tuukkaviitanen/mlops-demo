@@ -3,6 +3,7 @@ import pandas as pd
 from flask import Flask, jsonify, request, Response
 from waitress import serve
 import os
+from flask_cors import CORS
 
 # Open the file in binary mode
 with open('model.pkl', 'rb') as file:
@@ -25,6 +26,8 @@ def predictBitcoinPrice(date):
   return result
 
 app = Flask("Crypto predict API")
+
+CORS(app) # Enables Cross-Origin Resource Sharing
 
 @app.route('/bitcoin', methods=['GET'])
 def bitcoin():

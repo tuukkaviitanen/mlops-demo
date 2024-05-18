@@ -21,7 +21,7 @@ WORKDIR /usr/src/app
 
 # Install API deps
 
-RUN pip install Flask waitress pandas prophet
+RUN pip install Flask waitress pandas prophet flask-cors
 
 # Copy API file
 

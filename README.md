@@ -38,7 +38,7 @@
       "prediction_high": 60034.61668451781
     }
     ```
-- [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is enabled for use form other applications
+- [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is enabled, so the API can be called from other web applications
   - [Flask-Cors](https://flask-cors.readthedocs.io/en/latest/) is used to simplify this process
 
 ## Dockerfile

@@ -1,6 +1,6 @@
 import pickle
 import pandas as pd
-from flask import Flask, jsonify, request, Response
+from flask import Flask, jsonify, request, Response, current_app
 from waitress import serve
 import os
 from flask_cors import CORS
@@ -19,31 +19,36 @@ def predictBitcoinPrice(date):
   result = {
     "prediction": prediction,
     "prediction_high": predictionHigh,
-    "prediction low": predictionLow,
-    "date": date
+    "prediction_low": predictionLow,
+    "date": date.isoformat()
   }
 
   return result
 
-app = Flask("Crypto predict API")
+def remove_timezone(date):
+  if date.tzinfo is not None:
+        # Convert to UTC and then remove the timezone
+        date = date.tz_convert('UTC')
+
+  return date.tz_localize(None)
+
+app = Flask("Crypto predict API", static_url_path='/')
 
 CORS(app) # Enables Cross-Origin Resource Sharing
+
+@app.route('/', methods=['GET'])
+def index():
+  return current_app.send_static_file("index.html")
 
 @app.route('/bitcoin', methods=['GET'])
 def bitcoin():
   if(request.method == 'GET'):
     dateInput = request.args.get('date')
-    parsedDate = pd.to_datetime(dateInput)
+    parsedDate = remove_timezone(pd.to_datetime(dateInput))
 
     result = predictBitcoinPrice(parsedDate)
 
     return jsonify(result)
-
-@app.route('/healthz', methods=['GET'])
-def healthcheck():
-    if(request.method == 'GET'):
-      return Response(status=200)
-
 
 port = int(os.environ.get("PORT", 8080))
 

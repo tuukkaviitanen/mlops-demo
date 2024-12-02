@@ -2,9 +2,9 @@
 
 > Demo about using [GitHub Actions](https://docs.github.com/en/actions) as a [MLOps](https://www.databricks.com/glossary/mlops) tool
 
-- **Running live at: https://crypto-predictor-08ot.onrender.com/bitcoin?date=2024-06-01**
+- **Running live at: https://crypto-predictor-08ot.onrender.com**
   - Running as a free tier service, so it takes some time to start responding
-  - `date` query parameter can be modified for different results
+  - Has [Swagger UI](https://swagger.io/tools/swagger-ui/) documentation with instructions
 
 ## Summary
 

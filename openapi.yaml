@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  version: 0.0.2
+  title: Crypto Predictor
+  description: MLOps demo project to predict cryptocurrency prices
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/MIT
+paths:
+  /bitcoin:
+    get:
+      summary: Responds with the predicted Bitcoin price for the specified date and time
+      tags:
+        - Bitcoin
+      parameters:
+        - $ref: "#/components/parameters/Date"
+      responses:
+        200:
+          description: Loaded prediction successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Prediction"
+        500:
+          $ref: "#/components/responses/InternalError"
+
+components:
+  parameters:
+    Date:
+      in: query
+      name: date
+      description: The date or datetime for the prediction
+      required: true
+      schema:
+        type: string
+        format: date
+        example: 2025-01-01T00:00:00Z
+  schemas:
+    Prediction:
+      type: object
+      description: Prediction object
+      properties:
+        date:
+          description: DateTime string for the prediction
+          type: string
+          format: date
+          example: 2025-01-01T00:00:00Z
+        prediction:
+          type: number
+          description: Prediction for the specified date
+          example: 56771.779953588826
+        prediction_low:
+          type: number
+          description: Lower limit of the confidence are for the prediction
+          example: 53746.06414094623
+        prediction_high:
+          type: number
+          description: Upper limit of the confidence are for the prediction
+          example: 60034.61668451781
+
+  responses:
+    InternalError:
+      description: Internal error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Unexpected error occurred

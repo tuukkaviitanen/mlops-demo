@@ -11,7 +11,7 @@
 - Wraps the model inside a [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) [API](https://www.ibm.com/topics/api)
 - Creates a [Docker](https://www.docker.com/) image out of the API with descriptive tags
 - ~~Deploys the latest image to [Render](https://render.com/)~~
-- Does all of this in a GitHub Actions workflow every 6 hours to always keep the model trained with the latest data
+- Does all of this in a GitHub Actions workflow every 24 hours to always keep the model trained with the latest data
 
 ## Model training
 
@@ -49,7 +49,7 @@
 
 ## GitHub Actions workflow
 
-- Runs on push to main branch and on a [CRON schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) every 6 hours
+- Runs on push to main branch and on a [CRON schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) every 24 hours
 - Tags a new commit with a [semantic version](https://www.geeksforgeeks.org/introduction-semantic-versioning/)
   - If run with a schedule, commit is already tagged, so the existing version is just read
 - Builds a [Docker image](https://docs.docker.com/guides/docker-concepts/the-basics/what-is-an-image/) using the [Dockerfile](Dockerfile) and publishes the image to [GitHub Container Registry (ghcr.io)](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) under this GitHub repository

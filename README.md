@@ -2,16 +2,15 @@
 
 > Demo about using [GitHub Actions](https://docs.github.com/en/actions) as a [MLOps](https://www.databricks.com/glossary/mlops) tool
 
-- **Running live at: https://crypto-predictor-08ot.onrender.com**
-  - Running as a free tier service, so it takes some time to start responding
-  - Has [Swagger UI](https://swagger.io/tools/swagger-ui/) documentation with instructions
+- **Running live at: https://crypto-predictor.tuukka.net**
+  - Has [Swagger UI](https://swagger.io/tools/swagger-ui/) API documentation
 
 ## Summary
 
 - Teaches a machine learning model from real-time data, that predicts the price of [Bitcoin](https://bitcoin.org/en/) at a specific time
 - Wraps the model inside a [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) [API](https://www.ibm.com/topics/api)
 - Creates a [Docker](https://www.docker.com/) image out of the API with descriptive tags
-- Deploys the latest image to [Render](https://render.com/)
+- ~~Deploys the latest image to [Render](https://render.com/)~~
 - Does all of this in a GitHub Actions workflow every 6 hours to always keep the model trained with the latest data
 
 ## Model training
@@ -32,9 +31,9 @@
   - Uses the `date` parameter to run it through the model and returns the predicted price in the following [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) format:
     ```
     {
-      "date": "Sat, 01 Jun 2024 00:00:00 GMT",
+      "date": "2025-01-01T00:00:00Z",
       "prediction": 56771.779953588826,
-      "prediction low": 53746.06414094623,
+      "prediction_low": 53746.06414094623,
       "prediction_high": 60034.61668451781
     }
     ```
@@ -59,9 +58,9 @@
     - The semantic version of the commit (e.g. `0.3.1`) for finding the latest image of this specific commit
     - The semantic version combined with the timestamp of the build (e.g. `0.3.1-20240518121047`) for having a unique identifier for each build, that also clearly states the software version and the build time
   - It's important to note that only one image can hold a specific tag at a time, and other images holding the same tags will lose those tags
-- Triggers [Render](https://render.com/) deployment for the application
-  - The Render web service is configured to run the image with the `latest` tag so it will always deploy the newly built image
-    - This image deployment allows most of the configuring to be done in the repository and just minimal setup at Render side
+- ~~Triggers [Render](https://render.com/) deployment for the application~~
+  - ~~The Render web service is configured to run the image with the `latest` tag so it will always deploy the newly built image~~
+    - ~~This image deployment allows most of the configuring to be done in the repository and just minimal setup at Render side~~
 
 ## Setup
 

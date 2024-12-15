@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 0.0.2
+  version: 0.0.3
   title: Crypto Predictor
   description: MLOps demo project to predict cryptocurrency prices
   license:
@@ -21,8 +21,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Prediction"
+        400:
+          $ref: "#/components/responses/InvalidRequestError"
         500:
           $ref: "#/components/responses/InternalError"
+  /bitcoin/forecast:
+    get:
+      summary: Responds with a PNG image of the Bitcoin price forecast for the next year
+      tags:
+        - Bitcoin
+      responses:
+        200:
+          description: Loaded forecast successfully
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+  /bitcoin/trends:
+    get:
+      summary: Responds with a PNG image of the identified Bitcoin price trends
+      tags:
+        - Bitcoin
+      responses:
+        200:
+          description: Loaded trends successfully
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
 
 components:
   parameters:
@@ -44,7 +72,7 @@ components:
           description: DateTime string for the prediction
           type: string
           format: date
-          example: 2025-01-01T00:00:00Z
+          example: 2024-01-01T00:00:00Z
         prediction:
           type: number
           description: Prediction for the specified date
@@ -59,6 +87,16 @@ components:
           example: 60034.61668451781
 
   responses:
+    InvalidRequestError:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid date format
     InternalError:
       description: Internal error
       content:

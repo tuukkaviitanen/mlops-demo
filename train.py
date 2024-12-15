@@ -49,6 +49,29 @@ model.fit(df)
 
 print("Model trained")
 
-#save model
+# Save model as binary
 with open('model.pkl', 'wb') as file:
     pickle.dump(model, file)
+
+print("Creating forecast...")
+
+# Make a future dataframe for 1 year and make predictions for the period
+
+future = model.make_future_dataframe(periods=365)
+forecast = model.predict(future)
+
+# Plot the forecast
+
+fig = model.plot(forecast)
+
+for ax in fig.get_axes():
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Value in USD")
+
+fig_components = model.plot_components(forecast)
+
+# Save figures as PNG
+fig.savefig('fig.png')
+fig_components.savefig('fig_components.png')
+
+print("Forecast created")

@@ -5,7 +5,8 @@ WORKDIR /usr/src/app
 # Install only training deps
 RUN pip install \
     alpaca-py==0.33.1 \
-    prophet==1.1.6
+    prophet==1.1.6 \
+    kaleido==0.2.1
 
 COPY ./train.py ./
 
@@ -41,6 +42,9 @@ COPY --from=build-stage /usr/src/app/model.pkl ./
 # Copy Swagger UI files
 COPY --from=swagger-builder /usr/share/nginx/html ./static
 COPY ./openapi.yaml ./static/openapi.yaml
+
+# Copy figs
+COPY --from=build-stage /usr/src/app/fig* ./static/
 
 # Run API with unbuffered text output (no need to flush)
 CMD ["python", "-u", "api.py"]

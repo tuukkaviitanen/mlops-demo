@@ -42,13 +42,26 @@ def index():
 
 @app.route('/bitcoin', methods=['GET'])
 def bitcoin():
-  if(request.method == 'GET'):
-    dateInput = request.args.get('date')
-    parsedDate = remove_timezone(pd.to_datetime(dateInput))
+  dateInput = request.args.get('date')
+  try:
+      parsedDate = remove_timezone(pd.to_datetime(dateInput))
+  except:
+      return jsonify({"error": "Invalid date format"}), 400
 
+  try:
     result = predictBitcoinPrice(parsedDate)
+  except:
+    return jsonify({"error": "Unexpected error occurred"}), 500
 
-    return jsonify(result)
+  return jsonify(result)
+
+@app.route('/bitcoin/forecast', methods=['GET'])
+def bitcoin_forecast():
+  return current_app.send_static_file("fig.png")
+
+@app.route('/bitcoin/trends', methods=['GET'])
+def bitcoin_trends():
+  return current_app.send_static_file("fig_components.png")
 
 port = int(os.environ.get("PORT", 8080))
 

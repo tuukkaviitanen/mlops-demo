@@ -5,6 +5,10 @@
 - **Running live at: https://crypto-predictor.tuukka.net**
   - Has [Swagger UI](https://swagger.io/tools/swagger-ui/) API documentation
 
+## Up-to-date Bitcoin forecast
+
+![Bitcoin forecast](https://crypto-predictor.tuukka.net/bitcoin/forecast)
+
 ## Summary
 
 - Teaches a machine learning model from real-time data, that predicts the price of [Bitcoin](https://bitcoin.org/en/) at a specific time

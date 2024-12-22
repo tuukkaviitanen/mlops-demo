@@ -5,7 +5,7 @@
 - **Running live at: https://crypto-predictor.tuukka.net**
   - Has [Swagger UI](https://swagger.io/tools/swagger-ui/) API documentation
 
-## Up-to-date Bitcoin forecast
+## Latest Bitcoin forecast
 
 ![Bitcoin forecast](https://crypto-predictor.tuukka.net/bitcoin/forecast)
 
